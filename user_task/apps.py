@@ -4,3 +4,6 @@ from django.apps import AppConfig
 class UserTaskConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "user_task"
+
+    def ready(self):
+        import user_task.signals  # noqa
