@@ -1,0 +1,12 @@
+{
+  "[python]": {
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.removeUnusedImports": "explicit",
+            "autoflake.removeUnusedImports": "explicit",
+        },
+        "editor.formatOnSave": true,
+    },
+}
