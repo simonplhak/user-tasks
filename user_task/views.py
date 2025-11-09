@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.db.transaction import atomic
 import mptt
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -12,6 +13,7 @@ from user_task.serializers import TaskSerializer
 
 @api_view(["GET", "POST"])
 @permission_classes([IsAuthenticated])
+@atomic
 def tasks(request: Request) -> Response:
     serializer = TaskSerializer(data=request.data)
     if request.method == "GET":
@@ -45,6 +47,7 @@ def tasks(request: Request) -> Response:
 
 @api_view(["GET", "DELETE", "PUT"])
 @permission_classes([IsAuthenticated])
+@atomic
 def task(request: Request, pk: int) -> Response:
     task = get_object_or_404(Task, pk=pk, user=request.user)
     if request.method == "GET":
