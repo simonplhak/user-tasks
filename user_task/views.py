@@ -18,16 +18,13 @@ def tasks(request: Request) -> Response:
     serializer = TaskSerializer(data=request.data)
     if request.method == "GET":
         filter_kwargs = {"user": request.user, "parent": None}
-        if status := request.query_params.get("status"):
-            status = status.upper()
-            print(
-                type(Task.Status.choices), type(Task.Status.values), Task.Status.values
-            )
-            if status not in Task.Status.values:
+        if task_status := request.query_params.get("status"):
+            task_status = task_status.upper()
+            if task_status not in Task.Status.values:
                 raise ValidationError(
                     detail=f"Allowed status queries: {Task.Status.values}"
                 )
-            filter_kwargs["status"] = status
+            filter_kwargs["status"] = task_status
         if title := request.query_params.get("title"):
             title = title
             filter_kwargs["title__icontains"] = title
