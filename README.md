@@ -18,3 +18,5 @@ docker exec -it user-task /bin/bash
 python manage.py createsuperuser
 ```
 
+To see API documentation, import `postman.json` into Postman.
+
